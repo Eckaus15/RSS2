@@ -39,7 +39,6 @@ class TableTableViewController: UITableViewController, NSXMLParserDelegate, Side
         
         // feed properties
         if (element as NSString).isEqualToString("item"){
-            //elements = NSMutableArray.alloc()
             elements = NSMutableDictionary.alloc()
             elements = [:]
             ftitle = NSMutableString.alloc()
@@ -121,14 +120,24 @@ class TableTableViewController: UITableViewController, NSXMLParserDelegate, Side
         
         return cell
     }
-   //ERROR Within the "var item =" not sure the correct thing to set it to
+/*   //ERROR Within the "var item =" not sure the correct thing to set it to
      override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //var item = self.link[indexPath.row]
+       // var item = self.elements[indexPath.row] as
         var con = KINWebBrowserViewController()
-        var URL = NSURL(string: link)
+        var URL = NSURL(string: element)
         //var url = nsurl(string: item.link)
         con.loadURL(URL)
         self.navigationController?.pushViewController(con, animated: true)
+    } */
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let dictionary = self.elements[indexPath.row] as Dictionary<String, String>
+        let con = KINWebBrowserViewController()
+        let link = dictionary["link"]
+        let URL = NSURL(string: link!)
+        con.loadURL(URL)
+        self.navigationController?.pushViewController(con, animated: true)
+        
     }
     
 
